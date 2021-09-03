@@ -1,6 +1,5 @@
 import os
 
-
 # Prepare the enviorment for tiemeloop
 os.system("scons -j4")
 os.system("source env/setup-env.bash")
@@ -32,7 +31,6 @@ ac_name = "./analysis/actual_computes/ac.txt"
 f_topo_order = open("topo_order.txt", "r")
 char = f_topo_order.read(1)
 fname = ""
-run = 0
 while char:
     if char != " ":
         fname += char
@@ -46,7 +44,7 @@ while char:
         command_source += out_name
         print(command_source)
         os.system(command_source)
-        run = run + 1
+
         # Rename and move the outcome to destination folder
         isFile = os.path.isfile("./timeloop-mapper.stats.txt")
         if isFile is True:
@@ -62,6 +60,7 @@ while char:
             while num_line <= 14:
                 line = analysis_file.readline()
                 num_line = num_line + 1
+            
             # Write algorithm_computes
             ag_f.write(line)
             ag_f.close()
@@ -74,6 +73,7 @@ while char:
             ac_f.write(line)
             ac_f.close()
             analysis_file.close()
+            
         fname = ""
     char = f_topo_order.read(1)
 f_topo_order.close()
