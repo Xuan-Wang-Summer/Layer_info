@@ -322,7 +322,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu") # PyTorch 
 model = torchvision.models.resnet18().to(device)
 # Change inputs
 example = torch.rand(1, 3, 224, 224)
-example = example.cuda()
+example = example.to(device)
 # Change template
 temp_name = "template.txt"
 # Run the anaylsis
