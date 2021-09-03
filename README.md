@@ -6,7 +6,7 @@ Utilizing **Timeloop** developed by **NVlab**, the generated recorded paratmeter
 ## Usage
 The scripts and templates should be directly put under the **timeloop** folder for convienent usage.
 Modify **template.txt** to try more templates.
-Modify part of the **order_map.py** and **layer_problem.py** to try more models.
+Modify parts of the **order_map.py** and **layer_problem.py** to try more models.
 
 ## Examples
 Modify the following code to test on more models.
