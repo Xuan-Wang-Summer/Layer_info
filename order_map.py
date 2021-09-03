@@ -114,6 +114,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu") # PyTorch 
 model = torchvision.models.resnet18().to(device)
 # Change inputs
 example = torch.rand(1, 3, 224, 224)
+example = example.to(device)
 # Run the anaylsis
 topo_result = topo(model, example)
 match_result = match_name(model, example)
