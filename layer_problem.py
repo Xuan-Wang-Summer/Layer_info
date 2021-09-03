@@ -21,7 +21,6 @@ import shutil
 from torch.jit import ScriptModule
 import torchvision
 import torchvision.transforms as transforms
-from google.colab import files
 
 # Holds the information for the information for the layer
 # weight_h = R, weight_w = S, output_h = P, output_w = Q, num_in_chan = C,
