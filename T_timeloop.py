@@ -57,17 +57,17 @@ while char:
             analysis_file = open(result_name, "r")
             line = analysis_file.readline()
             num_line = 1
-            while num_line <= 14:
+            while num_line <= 15:
                 line = analysis_file.readline()
                 num_line = num_line + 1
             
             # Write algorithm_computes
-            ag_f.write(line)
-            ag_f.close()
-            line = analysis_file.readline()
-            # Write cycles
             cycles_f.write(line)
             cycles_f.close()
+            line = analysis_file.readline()
+            # Write cycles
+            ag_f.write(line)
+            ag_f.close()
             line = analysis_file.readline()
             # Write actual_computs
             ac_f.write(line)
