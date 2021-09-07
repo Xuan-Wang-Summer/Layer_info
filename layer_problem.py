@@ -21,6 +21,7 @@ import shutil
 from torch.jit import ScriptModule
 import torchvision
 import torchvision.transforms as transforms
+import sys
 
 # Holds the information for the information for the layer
 # weight_h = R, weight_w = S, output_h = P, output_w = Q, num_in_chan = C,
@@ -323,8 +324,8 @@ model = torchvision.models.resnet18().to(device)
 # Change inputs
 example = torch.rand(1, 3, 224, 224)
 example = example.to(device)
-# Change template
-temp_name = "template.txt"
+# Assign templates
+temp_name = sys.argv[1]
 # Run the anaylsis
 summary(model, example, temp_name)
 out = model(example)
