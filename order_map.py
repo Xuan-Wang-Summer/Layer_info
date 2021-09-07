@@ -100,13 +100,17 @@ def topo(model, input):
 
 # Write the order of processing files into a file line by line
 def write_order(topo, match):
-  filename = "topo_order.txt"
-  f = open(filename, "w+")
+  filename_h = "topo_order.txt"
+  filename_v = "v_order.txt"
+  f_h = open(filename_h, "w+")
+  f_v = open(filename_v, "w+")
   for x in topo:
     if(x != "node"):
       if(match[x] != "None"):
-        f.write(match[x] + " ") 
-  f.close()
+        f_h.write(match[x] + " ")
+        f_v.write(match[x] + "\n")
+  f_h.close()
+  f_v.close()
 
 # Change the following line to use different models
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu") # PyTorch v0.4.0
