@@ -5,7 +5,6 @@ Utilizing **Timeloop** developed by **NVlab**, the generated recorded paratmeter
 
 ## Usage
 The scripts and templates should be directly put under the **timeloop** folder for convienent usage.
-Modify **template.txt** to try more templates.
 Modify parts of the **order_map.py** and **layer_problem.py** to try more models.
 
 ## Examples
@@ -18,4 +17,9 @@ model = torchvision.models.resnet18().to(device)
 # Change inputs
 example = torch.rand(1, 3, 224, 224)
 example = example.to(device)
+````
+
+To use **layer_problem.py** on different templates, run:
+````
+python layer_problem.py path_to_your_template
 ````
