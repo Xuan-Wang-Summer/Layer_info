@@ -23,9 +23,12 @@ if os.path.isfile("./analysis/algorithm_computes/ag.txt"):
     os.remove("./analysis/algorithm_computes/ag.txt")
 if os.path.isfile("./analysis/actual_computes/ac.txt"):
     os.remove("./analysis/actual_computes/ac.txt")
+if os.path.isfile("./analysis/invalid.txt"):
+     os.remove("./analysis/invalid.txt")
 cycles_name = "./analysis/cycles/cycles.txt"
 ag_name = "./analysis/algorithm_computes/ag.txt"
 ac_name = "./analysis/actual_computes/ac.txt"
+invalid_name = "./analysis/invalid.txt"
 
 # Go through the file following the topological order
 f_topo_order = open("topo_order.txt", "r")
@@ -74,6 +77,12 @@ while char:
             ac_f.close()
             analysis_file.close()
             
+        # Record the invalid files
+        else:
+            f_invalid = open(invalid_name, "a")
+            invalid = "%s.txt" % fname
+            f_invalid.write(invalid)
+            f_invalid.close()            
         fname = ""
     char = f_topo_order.read(1)
 f_topo_order.close()
