@@ -184,10 +184,14 @@ def apply_hooks(
     # Check whether a module has a weight attribute
     if hasattr(module, "weight") and hasattr(module.weight, "size"):
       weight_size = module.weight.size()    # Get the size of weight
-      info_weight_h = weight_size[0]        # Get height of the weight
+      # Assign weight for conv
+      if (len(weight_size)) >= 3:
+        info_weight_h = weight_size[2]        # Get height of the weight
+        info_weight_w = weight_size[3]        # Get width of the weight
       # Check the length of weight size
-      if (len(weight_size) > 1) :
-        info_weight_w = weight_size[1]        # Get width of the weight
+      elif (len(weight_size) > 1) :
+        info_weight_h = weight_size[0]        # Get height of the weight
+        info_weight_w = weight_size[1]
       # Width and height are the same if weight size is 1
       else:
         info_weight_w = weight_size[0]
