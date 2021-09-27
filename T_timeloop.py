@@ -45,7 +45,6 @@ while char:
         command_source += in_name
         command_source += " > "
         command_source += out_name
-        print(command_source)
         os.system(command_source)
 
         # Rename and move the outcome to destination folder
