@@ -44,6 +44,25 @@ def match_name(model, input):
       result[i] = str(total_valid)
   return result
 
+# Match the filename_type
+def match_type(model, input):
+  trace, out = torch.jit._get_trace_graph(model, input)
+  torch_graph = torch.onnx._optimize_trace(trace, torch.onnx.OperatorExportTypes.ONNX)
+  total_layer = 0
+  for torch_node in torch_graph.nodes():
+    total_layer = total_layer + 1
+  result = {x: "None" for x in range(1, total_layer)}
+  #Check whether the layer is valid
+  total_valid = 0
+  i = 0
+  for torch_node in torch_graph.nodes():
+    i = i + 1
+    if check_valid(torch_node):
+      total_valid = total_valid + 1
+      name= torch_node.kind()
+      result[total_valid] = name
+  return result
+
 # Store the relationship of each layer
 def rela(model, input, inputs, outputs, visited, pre, post):
   num_s = 1
@@ -99,18 +118,22 @@ def topo(model, input):
   return stack[::-1]
 
 # Write the order of processing files into a file line by line
-def write_order(topo, match):
+def write_order(topo, match, name_list):
   filename_h = "topo_order.txt"
   filename_v = "v_order.txt"
+  filename_type = "namelist.txt"
   f_h = open(filename_h, "w+")
   f_v = open(filename_v, "w+")
+  f_t = open(filename_type, "w+")
   for x in topo:
     if(x != "node"):
       if(match[x] != "None"):
         f_h.write(match[x] + " ")
         f_v.write(match[x] + "\n")
+        f_t.write(name_list[int(match[x])] + "\n")
   f_h.close()
   f_v.close()
+  f_t.close()
 
 # Change the following line to use different models
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu") # PyTorch v0.4.0
@@ -122,4 +145,5 @@ example = example.to(device)
 # Run the anaylsis
 topo_result = topo(model, example)
 match_result = match_name(model, example)
-write_order(topo_result, match_result)
+match_type = match_type(model, example)
+write_order(topo_result, match_result, match_type)
