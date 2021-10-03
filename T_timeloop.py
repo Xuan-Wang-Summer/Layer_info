@@ -11,23 +11,20 @@ if isDirR is False:
     os.mkdir("./result")
 if isDirA is False:
     os.mkdir("./analysis")
-if os.path.isdir("./analysis/cycles") is False:
-    os.mkdir("./analysis/cycles")
-if os.path.isdir("./analysis/algorithm_computes") is False:
-    os.mkdir("./analysis/algorithm_computes")
-if os.path.isdir("./analysis/actual_computes") is False:
-    os.mkdir("./analysis/actual_computes")
-if os.path.isfile("./analysis/cycles/cycles.txt"):
-    os.remove("./analysis/cycles/cycles.txt")
-if os.path.isfile("./analysis/algorithm_computes/ag.txt"):
-    os.remove("./analysis/algorithm_computes/ag.txt")
-if os.path.isfile("./analysis/actual_computes/ac.txt"):
-    os.remove("./analysis/actual_computes/ac.txt")
+if os.path.isfile("./analysis/cycles.txt"):
+    os.remove("./analysis/cycles.txt")
+if os.path.isfile("./analysis/ag.txt"):
+    os.remove("./analysis/ag.txt")
+if os.path.isfile("./analysis/ac.txt"):
+    os.remove("./analysis/ac.txt")
+if os.path.isfile("./analysis/ac.txt"):
+    os.remove("./analysis/energy.txt")
 if os.path.isfile("./analysis/invalid.txt"):
-     os.remove("./analysis/invalid.txt")
-cycles_name = "./analysis/cycles/cycles.txt"
-ag_name = "./analysis/algorithm_computes/ag.txt"
-ac_name = "./analysis/actual_computes/ac.txt"
+    os.remove("./analysis/invalid.txt")
+cycles_name = "./analysis/cycles.txt"
+ag_name = "./analysis/ag.txt"
+ac_name = "./analysis/ac.txt"
+energy_name = "./analysis/energy.txt"
 invalid_name = "./analysis/invalid.txt"
 
 # Go through the file following the topological order
@@ -56,6 +53,7 @@ while char:
             cycles_f = open(cycles_name, "a")
             ag_f = open(ag_name, "a")
             ac_f = open(ac_name, "a")
+            energy_f = open(energy_name, "a")
             analysis_file = open(result_name, "r")
             line = analysis_file.readline()
             num_line = 1
@@ -74,6 +72,12 @@ while char:
             # Write actual_computs
             ac_f.write(line)
             ac_f.close()
+            # Write Energy
+            line = analysis_file.readline()
+            line = analysis_file.readline()
+            line = analysis_file.readline()
+            energy_f.write(line)
+            energy_f.close()
             analysis_file.close()
             
         # Record the invalid files
